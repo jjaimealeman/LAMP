@@ -2,7 +2,7 @@
 # LAMP
 >_This is my detailed guide on setting up a LAMP server on BunsenLabs GNU/Linux 9.8 (Helium) x86_64. It should work fine on other Debian distros like *buntu._
 >
->_I also show you how to setup, enable and disable VirtualHosts in your '/home/` directory with proper permissions._
+>_I also show you how to setup, enable and disable VirtualHosts in your `/home/` directory with proper permissions._
 
 >>_This guide will install the following versions:_
 >> - _Apache/2.4.25 (Debian)_ 
@@ -356,4 +356,22 @@ sudo chgrp www-data ~/www
 Now gives members of `www-data` group read, write and directory rights.
 ```
 sudo chmod g+rwxs ~/www
+```
+[top](#LAMP)
+---
+## ToDo
+
+- [ ] install an easy to use development SMTP server for localhost testing
+  - [ ] a quick google got me this using postfix https://gist.github.com/raelgc/6031274
+- [ ] install localhost certificate to enable `https`
+  - [ ] a quick google got me this [How to get HTTPS working on your local development environment in 5 minutes](https://medium.freecodecamp.org/how-to-get-https-working-on-your-local-development-environment-in-5-minutes-7af615770eec) and this [Certificates for localhost](https://letsencrypt.org/docs/certificates-for-localhost/)
+- [ ] install nodejs and npm, maybe even composer
+
+---
+```
+Copyright © 2019 OrganizedFellow/jaimito organizedfellow@gmail.com
+
+This work is free. You can redistribute it and/or modify it under the
+terms of the Do What The Fuck You Want To Public License, Version 2,
+as published by Sam Hocevar. See http://www.wtfpl.net/ for more details.
 ```
