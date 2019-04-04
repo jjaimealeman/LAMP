@@ -330,26 +330,3 @@ Now gives members of `www-data` group read, write and directory rights.
 ```
 sudo chmod g+rwxs ~/www
 ```
-
-
-
-
-
-sudo chown -R jaimito:jaimito ~/www
-sudo chown -R www-data:www-data ~/www
-
-sudo chmod -R 755 ~/www
-
-sudo chown -R www-data:www-data ~/www
-sudo chmod -R g+w ~/www
-
-
-
-
-
-
-
- Take ownership of the `.git` folder back
-```
-sudo chown -R jaimito:jaimito ~/www/project1.webdev/.git
-```
