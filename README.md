@@ -1,48 +1,37 @@
 
 # LAMP
+>_This is my detailed guide on setting up a LAMP server on BunsenLabs GNU/Linux 9.8 (Helium) x86_64. It should work fine on other Debian distros like *buntu._
+>
+>_I also show you how to setup, enable and disable VirtualHosts in your '/home/` directory with proper permissions._
 
-_This is my short guide on setting up LAMP on a fresh installation of BunsenLabs GNU/Linux 9.8 (Helium) x86_64._
-
-_This guide will install the following versions:_
-  - _Apache/2.4.25 (Debian)_ 
-  - _install mariadb  Ver 15.1 Distrib 10.1.37-MariaDB,_
-  - _install PHP 7.0.33-0+deb9u3_
-
-_Your requirements may be different than mine. There are plenty of guides and tutorials out there but these versions suit me just fine `:)`_
+>>_This guide will install the following versions:_
+>> - _Apache/2.4.25 (Debian)_ 
+>> - _Mariadb  Ver 15.1 Distrib 10.1.37-MariaDB,_
+>> - _PHP 7.0.33-0+deb9u3_
+>> - _UFW 0.35_
+>>
+>> _Your requirements may be different than mine. There are plenty of guides and tutorials out there but these versions suit me just fine `:)`_
 
 ---
-## INSTALL APACHE
+## Table of Contents
+ - [Apache](#APACHE)
+ - [MariaDB](#MARIADB)
+ - [PHP](#PHP)
+ - [UFW](#UFW)
+ - [VirtualHosts](#VIRTUALHOSTS)
+ - [Adminer](#ADMINER)
+ - [Permissions](#PERMISSIONS)
+
+---
+## APACHE
 ```
 sudo apt-get install apache2 -y
 sudo a2enmod rewrite
 sudo systemctl restart apache2
 ```
+[top](#LAMP)
 ---
-## INSTALL UFW FIREWALL
-```
-sudo apt install ufw
-```
-See what's available
-```
-sudo ufw app list
-```
-You should see the following output or similar
-> 
-```
-Available applications:
-...
-  WWW
-  WWW Cache
-  WWW Full
-  WWW Secure
-...
-```
-Let's give access to `http` and `https`
-```
-sudo ufw allow in "WWW Full"
-```
----
-## INSTALL MARIADB
+## MARIADB
 ```
 sudo apt install mariadb-server -y
 ```
@@ -80,8 +69,9 @@ If you should need to login in the future, this is the command
 ```
 mariadb -u admin -p
 ```
+[top](#LAMP)
 ---
-## INSTALL PHP
+## PHP
 ```
 sudo apt install php libapache2-mod-php php-mysql php-gd -y
 ```
@@ -150,11 +140,45 @@ Let's remove the file
 ```
 sudo rm /var/www/html/info.php
 ```
+[top](#LAMP)
+---
+## UFW
+
+> #### What is UFW?
+>
+> _**Uncomplicated Firewall** is a program for managing a netfilter firewall designed to be easy to use. It uses a command-line interface consisting of a small number of simple commands, and uses iptables for configuration._
+
+
+```
+sudo apt install ufw
+```
+See what's available
+```
+sudo ufw app list
+```
+You should see the following output or similar
+> 
+```
+Available applications:
+...
+  WWW
+  WWW Cache
+  WWW Full
+  WWW Secure
+...
+```
+Let's give access to `http` and `https`
+```
+sudo ufw allow in "WWW Full"
+```
+[top](#LAMP)
 ---
 ## VIRTUALHOSTS
-_I prefer to have my projects served directly from my home directory and avoid the mess with permissions and ownership by serving files from `/var/www/html/*`_
+> _I prefer to have my projects served directly from my home directory instead of serving files from `/var/www/html/projectX`._
+> 
+> _Plus is just makes it easy to have all my own personal files in `home` anyways._
 ```
-mkdir ~/www && cd ~/www
+mkdir ~/www
 ```
 Let's create a file in the `/etc/apache2/sites-available/` directory for each virtual host that we want to set up.
 
@@ -263,9 +287,10 @@ Restart apache
 sudo systemctl reload apache2
 ```
 Visit your project in your browser http://project1.webdev
----
 
-## INSTALL ADMINER
+[top](#LAMP)
+---
+## ADMINER
 
 > #### What is Adminer?
 > _Adminer (formerly phpMinAdmin) is a full-featured database management tool written in PHP. Conversely to phpMyAdmin, it consist of a single file ready to deploy to the target server. Adminer is available for MySQL, MariaDB, PostgreSQL, SQLite, MS SQL, Oracle, Firebird, SimpleDB, Elasticsearch and MongoDB._
@@ -317,8 +342,10 @@ sudo service apache2 restart
 ```
 You can now log in to Adminer with the username and password you set up above when installing and securing MariaDB.
 
+[top](#LAMP)
 ---
-Before we give apache ownership of `~/www` we add you to the group `www-data` _(don't forget to replace my username `jaimito` with your own)_.
+## PERMISSIONS
+Before we give apache ownership of `~/www` we add `$USER` to the group `www-data` _(don't forget to replace my username `jaimito` with your own)_.
 ```
 sudo usermod -a -G www-data jaimito
 ```
