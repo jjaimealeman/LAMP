@@ -186,7 +186,7 @@ I like to use the TLD of `.webdev`. You can use `local`, `localhost`, `test`, an
 
 Let's make `project1.webdev`
 
-Copy/Paste this entire block _(don't forget to replace my username `jaimito` with your own)_.
+Copy/Paste this entire block _(don't forget to replace my username `organizedfellow` with your own)_.
 
 
 ```
@@ -195,10 +195,10 @@ sudo tee -a /etc/apache2/sites-available/project1.webdev.conf << END
 	ServerAdmin webmaster@project1.webdev
 	ServerName project1.webdev
 	ServerAlias www.project1.webdev
-	DocumentRoot /home/jaimito/www/project1.webdev/public_html/
-	ErrorLog /home/jaimito/www/project1.webdev/logs/error.log
-	CustomLog /home/jaimito/www/project1.webdev/logs/access.log combined
-    <Directory "/home/jaimito/www/project1.webdev/public_html">
+	DocumentRoot /home/organizedfellow/www/project1.webdev/public_html/
+	ErrorLog /home/organizedfellow/www/project1.webdev/logs/error.log
+	CustomLog /home/organizedfellow/www/project1.webdev/logs/access.log combined
+    <Directory "/home/organizedfellow/www/project1.webdev/public_html">
         AllowOverride all
         Options Indexes FollowSymLinks
         Require local
@@ -242,9 +242,9 @@ FIND:
 ```
 Replace `/var/www/` with `~/www/`
 
-Like this _(don't forget to replace my username `jaimito` with your own)_
+Like this _(don't forget to replace my username `organizedfellow` with your own)_
 ```
-<Directory /home/jaimito/www/>
+<Directory /home/organizedfellow/www/>
     Options Indexes FollowSymLinks
     AllowOverride None
     Require all granted
@@ -302,10 +302,10 @@ sudo tee -a /etc/apache2/sites-available/adminer.webdev.conf << END
 	ServerAdmin webmaster@adminer.webdev
 	ServerName adminer.webdev
 	ServerAlias www.adminer.webdev
-	DocumentRoot /home/jaimito/www/adminer.webdev/public_html/
-	ErrorLog /home/jaimito/www/adminer.webdev/logs/error.log
-	CustomLog /home/jaimito/www/adminer.webdev/logs/access.log combined
-    <Directory "/home/jaimito/www/adminer.webdev/public_html">
+	DocumentRoot /home/organizedfellow/www/adminer.webdev/public_html/
+	ErrorLog /home/organizedfellow/www/adminer.webdev/logs/error.log
+	CustomLog /home/organizedfellow/www/adminer.webdev/logs/access.log combined
+    <Directory "/home/organizedfellow/www/adminer.webdev/public_html">
         AllowOverride all
         Options Indexes FollowSymLinks
         Require local
@@ -345,9 +345,9 @@ You can now log in to Adminer with the username and password you set up above wh
 [top](#LAMP)
 ---
 ## PERMISSIONS
-Before we give apache ownership of `~/www` we add `$USER` to the group `www-data` _(don't forget to replace my username `jaimito` with your own)_.
+Before we give apache ownership of `~/www` we add `$USER` to the group `www-data` _(don't forget to replace my username `organizedfellow` with your own)_.
 ```
-sudo usermod -a -G www-data jaimito
+sudo usermod -a -G www-data organizedfellow
 ```
 Then give apache ownership
 ```
