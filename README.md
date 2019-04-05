@@ -240,7 +240,7 @@ FIND:
         Require all granted
 </Directory>
 ```
-Replace `/var/www/` with `~/www/`
+Replace `/var/www/` with `/home/organizedfellow/www/`
 
 Like this _(don't forget to replace my username `organizedfellow` with your own)_
 ```
