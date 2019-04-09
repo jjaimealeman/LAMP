@@ -5,7 +5,7 @@
 >_I also show you how to setup, enable and disable VirtualHosts in your `/home/` directory with proper permissions._
 
 >>_This guide will install the following versions:_
->> - _Apache/2.4.25 (Debian)_ 
+>> - _Apache/2.4.25 (Debian)_
 >> - _Mariadb  Ver 15.1 Distrib 10.1.37-MariaDB,_
 >> - _PHP 7.0.33-0+deb9u3_
 >> - _UFW 0.35_
@@ -96,26 +96,26 @@ Restart apache and check status
 sudo systemctl restart apache2
 sudo systemctl status apache2
 ```
-OUTPUT from status should look like this:
-```
-apache2.service - The Apache HTTP Server
-   Loaded: loaded (/lib/systemd/system/apache2.service; enabled; vendor preset: enabled)
-   Active: active (running) since Thu 2019-04-04 11:22:09 MDT; 8s ago
-  Process: 680 ExecStop=/usr/sbin/apachectl stop (code=exited, status=0/SUCCESS)
-  Process: 689 ExecStart=/usr/sbin/apachectl start (code=exited, status=0/SUCCESS)
- Main PID: 695 (apache2)
-    Tasks: 6 (limit: 4915)
-   CGroup: /system.slice/apache2.service
-           ├─695 /usr/sbin/apache2 -k start
-           ├─712 /usr/sbin/apache2 -k start
-           ├─713 /usr/sbin/apache2 -k start
-           ├─714 /usr/sbin/apache2 -k start
-           ├─715 /usr/sbin/apache2 -k start
-           └─716 /usr/sbin/apache2 -k start
-
-Apr 04 11:22:09 acer systemd[1]: Starting The Apache HTTP Server...
-Apr 04 11:22:09 acer systemd[1]: Started The Apache HTTP Server.
-```
+>OUTPUT:
+>```
+>apache2.service - The Apache HTTP Server
+>   Loaded: loaded (/lib/systemd/system/apache2.service; enabled; vendor preset: enabled)
+>   Active: active (running) since Thu 2019-04-04 11:22:09 MDT; 8s ago
+>  Process: 680 ExecStop=/usr/sbin/apachectl stop (code=exited, status=0/SUCCESS)
+>  Process: 689 ExecStart=/usr/sbin/apachectl start (code=exited, status=0/SUCCESS)
+> Main PID: 695 (apache2)
+>    Tasks: 6 (limit: 4915)
+>   CGroup: /system.slice/apache2.service
+>           ├─695 /usr/sbin/apache2 -k start
+>           ├─712 /usr/sbin/apache2 -k start
+>           ├─713 /usr/sbin/apache2 -k start
+>           ├─714 /usr/sbin/apache2 -k start
+>           ├─715 /usr/sbin/apache2 -k start
+>           └─716 /usr/sbin/apache2 -k start
+>
+>Apr 04 11:22:09 acer systemd[1]: Starting The Apache HTTP Server...
+>Apr 04 11:22:09 acer systemd[1]: Started The Apache HTTP Server.
+>```
 > Feel free to install any php-modules you need. I installed phpgd as it is needed for my chosen CMS - [ProcessWire](https://github.com/processwire/processwire).
 
 Search for php modules
@@ -147,17 +147,59 @@ sudo rm /var/www/html/info.php
 > #### What is UFW?
 >
 > _**Uncomplicated Firewall** is a program for managing a netfilter firewall designed to be easy to use. It uses a command-line interface consisting of a small number of simple commands, and uses iptables for configuration._
-
-
 ```
 sudo apt install ufw
 ```
+Open firewall access to post 80/http:
+```
+sudo ufw allow http
+```
+Open firewall access to port 22/ssh:
+```
+sudo ufw allow ssh
+```
+Let's enable UFW
+```
+sudo ufw enable
+```
+> OUTPUT:
+>```
+>active and enabled on system startup
+>```
+Let's check the status of UFW:
+```
+sudo ufw status
+```
+
+>OUTPUT:
+>```
+>To                         Action      From
+>--                         ------      ----
+>80/tcp                     ALLOW       Anywhere
+>22/tcp                     ALLOW       Anywhere
+>80/tcp (v6)                ALLOW       Anywhere (v6)
+>22/tcp (v6)                ALLOW       Anywhere (v6)
+>```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 See what's available
 ```
 sudo ufw app list
 ```
 You should see the following output or similar
-> 
+>
 ```
 Available applications:
 ...
@@ -175,7 +217,7 @@ sudo ufw allow in "WWW Full"
 ---
 ## VIRTUALHOSTS
 > _I prefer to have my projects served directly from my home directory instead of serving files from `/var/www/html/projectX`._
-> 
+>
 > _Plus is just makes it easy to have all my own personal files in `home` anyways._
 ```
 mkdir ~/www
@@ -262,18 +304,18 @@ But first, let's see what is currently available.
 ```
 ls /etc/apache2/sites-available
 ```
-> OUTPUT > you should see this
-```
-000-default.conf  default-ssl.conf  project1.webdev.conf
-```
+> OUTPUT:
+>```
+>000-default.conf  default-ssl.conf  project1.webdev.conf
+>```
 If you run `sites-enabled`
 ```
 ls /etc/apache2/sites-enabled
 ```
-> OUTPUT > you get this
-```
-000-default.conf
-```
+> OUTPUT:
+>```
+>000-default.conf
+>```
 Let's enable our project
 ```
 sudo a2ensite project1.webdev.conf
