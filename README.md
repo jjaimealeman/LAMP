@@ -180,39 +180,6 @@ sudo ufw status
 >80/tcp (v6)                ALLOW       Anywhere (v6)
 >22/tcp (v6)                ALLOW       Anywhere (v6)
 >```
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-See what's available
-```
-sudo ufw app list
-```
-You should see the following output or similar
->
-```
-Available applications:
-...
-  WWW
-  WWW Cache
-  WWW Full
-  WWW Secure
-...
-```
-Let's give access to `http` and `https`
-```
-sudo ufw allow in "WWW Full"
-```
 [top](#LAMP)
 ---
 ## VIRTUALHOSTS
